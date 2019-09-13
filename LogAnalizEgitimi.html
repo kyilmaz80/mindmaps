@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet href="treestyles.css" type="text/css"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!--This file has been created with toxhtml.xsl--><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><title>Log Analiz Eğitimi</title><link rel="stylesheet" href="LogAnalizEgitimi.html_files/treestyles.css" type="text/css" /><script type="text/javascript" src="LogAnalizEgitimi.html_files/marktree.js"> 
+	</script></head><body><div class="basetop"><a onclick="expandAll(document.getElementById('base'))" href="#">Expand</a> -
+<a onclick="collapseAll(document.getElementById('base'))" href="#">Collapse</a></div><div class="basetext" id="base"><ul>
+	<li class="col" id="FMID_794987706FM"><div class="boxed"><div class="nodecontent" style="font-size:133%;">Log Analiz Eğitimi</div><div class="note-and-attributes"><span class="note"><p>
+      Taslak.
+    </p></span></div></div>
+		<ul class="subexp">
+	<li class="col" id="FMID_402150153FM"><div class="nodecontent">Log Dosyaları/Formatları?</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1072352461FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">Syslog</div><div class="note-and-attributes"><span class="note"><p>
+      Syslog is a pure simplex communications protocol.
+    </p></span></div></div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_135016578FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">Mesaj Yapısı</div><div class="note-and-attributes"><span class="note">
+    A syslog message consists of a standardized header and message containing the log' s contents.
+
+    <p /><p>
+      Daha önce RFC3164'deki gibi tasarlanmış:
+    </p><p><font face="Serif">&lt;34&gt;Oct 11 22:14:15 mymachine su: 'su root' failed for lonvick on /dev/pts/8</font></p><p /><p>
+      Sunucularda (var/log/messages) aşağıdaki gibi:
+    </p><p><font face="Serif">Oct 11 22:14:15 su: 'su root' failed for lonvick on /dev/pts/8 </font></p><p /><p><font face="Serif">https://tools.ietf.org/html/rfc5424 yeni standart. </font></p></span></div></div></li>
+	<li class="basic" id="FMID_70636871FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">Çalışma mantığı</div><div class="note-and-attributes"><span class="note"><ul><li>
+        Creator: Eric Allman, Developed In: 1980, Type: Protocol/Specification. Logging protocol standard, specified log message, transmission and reliability.
+      </li><li>
+        Related to: syslog-ng, rsyslog
+      </li></ul></span></div></div></li>
+	<li class="basic" id="FMID_376681949FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">Mimari</div><div class="note-and-attributes"><span class="note"><p>
+      Olası syslog mimarileri:
+    </p><ul><li>
+        1 cihaz bir alıcı kolektör<br /></li></ul><p>
+              +------+         +---------+
+    </p><p>
+              |Device|----&gt;----|Collector|
+    </p><p>
+              +------+         +---------+
+    </p><p><br /></p><ul><li>
+        Birden fazla cihaz, bir alıcı kolektör<br /></li></ul><p>
+              +------+         +-----+            +---------+
+    </p><p>
+              |Device|----&gt;----|Relay|----&gt;-------|Collector|
+    </p><p>
+              |      |-\       +-----+         /--|         |
+    </p><p>
+              +------+  \                     /   +---------+
+    </p><p>
+                         \      +-----+      /
+    </p><p>
+                          \--&gt;--|Relay|--&gt;--/
+    </p><p>
+                                +-----+
+    </p><p><br /></p><ul><li>
+        Mesajı alan ve başka bir cihaza yönlendiren cihaz (relay)
+      </li></ul><p>
+              +------+         +-----+         +---------+
+    </p><p>
+              |Device|----&gt;----|Relay|----&gt;----|Collector|
+    </p><p>
+              +------+         +-----+         +---------+
+    </p></span></div></div></li>
+	<li class="col" id="FMID_304559705FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">Facility</div><div class="note-and-attributes"><span class="note"><p>
+      Hangi tip log'ların tutulacağını gösterir. Tag gibidir. KEndi facility'mizi tanımlayamıyoruz; ancak kulanıcı için verilenlerden seçebiliyoruz. (local0,local1,...,local7)
+    </p></span></div></div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1592006676FM"><div class="boxed"><div class="nodecontent">4=Auth</div><div class="note-and-attributes"><span class="note">
+    Security/authentication messages
+  </span></div></div></li>
+	<li class="basic" id="FMID_1169249187FM"><div class="boxed"><div class="nodecontent">0=kern</div><div class="note-and-attributes"><span class="note">
+    Kernel messages
+  </span></div></div></li>
+	<li class="basic" id="FMID_1611941388FM"><div class="boxed"><div class="nodecontent">16=local0-23=local7</div><div class="note-and-attributes"><span class="note">
+    Locally used facilities
+  </span></div></div></li></ul></li>
+	<li class="col" id="FMID_1752565349FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">Severity (Şiddet)</div><div class="note-and-attributes"><span class="note"><p>
+      Ne detayda log tutulacağını gösterir.
+    </p></span></div></div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1567897793FM"><div class="nodecontent">0=emerg</div></li>
+	<li class="basic" id="FMID_1709403976FM"><div class="nodecontent">1=alert</div></li>
+	<li class="basic" id="FMID_1128809769FM"><div class="nodecontent">2=crit</div></li>
+	<li class="basic" id="FMID_866833882FM"><div class="nodecontent">7=debug</div></li></ul></li>
+	<li class="basic" id="FMID_685563867FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">Log yönlendirme</div><div class="note-and-attributes"><span class="note"><p>
+      Syslog'da tüm log'ların merkez log sunucuya yönlenmesi için:
+    </p><p /><p>
+      /etc/syslog.conf'da
+    </p><p /><p>
+      *.* @merkezi-log.example.com
+    </p></span></div></div></li>
+	<li class="col" id="FMID_589662901FM"><div class="boxed"><div class="nodecontent" style="font-size:117%;">log üretme</div><div class="note-and-attributes"><span class="note"><p>
+      logger yerine çeşitli log üreten uygulamalar da kullanılabilir.
+    </p></span></div></div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1421938737FM"><div class="boxed"><div class="nodecontent">logger komutu ile test</div><div class="note-and-attributes"><span class="note"><p>
+      logger [-p facility.priority] [-t tag] message
+    </p><p /></span></div></div></li>
+	<li class="basic" id="FMID_1495851277FM"><div class="nodecontent">Kiwi Syslog Generator Tool</div></li>
+	<li class="basic" id="FMID_1141921095FM"><div class="boxed"><div class="nodecontent">Flog</div><div class="note-and-attributes"><span class="note"><p>
+      https://github.com/mingrammer/flog
+    </p></span></div></div></li></ul></li></ul></li>
+	<li class="col" id="FMID_15964267FM"><div class="nodecontent">Log rotasyonu (log rotate)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_916730906FM"><div class="nodecontent">unix logrotate command</div></li>
+	<li class="basic" id="FMID_1074269174FM"><div class="nodecontent">/etc/logrotate.conf</div></li></ul></li>
+	<li class="col" id="FMID_345609631FM"><div class="nodecontent">Log tipleri</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_189135048FM"><div class="nodecontent">Access (erişim)</div></li>
+	<li class="basic" id="FMID_1525476651FM"><div class="nodecontent">Hata (Error)</div></li>
+	<li class="basic" id="FMID_1152917379FM"><div class="nodecontent">Audit (güvenlik)</div></li></ul></li>
+	<li class="col" id="FMID_757019569FM"><div class="nodecontent">Log Dosyaları</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1976693408FM"><div class="nodecontent">Yapısal (Structured)</div></li>
+	<li class="basic" id="FMID_909424338FM"><div class="nodecontent">Yapısal Olmayan (Unstructured)</div></li>
+	<li class="basic" id="FMID_843314419FM"><div class="nodecontent">Yarı yapısal (semi-structured)</div></li></ul></li>
+	<li class="col" id="FMID_1720568814FM"><div class="nodecontent">Log türü</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1019003189FM"><div class="nodecontent">Raw</div></li>
+	<li class="basic" id="FMID_1862043347FM"><div class="nodecontent">Parsed</div></li></ul></li>
+	<li class="col" id="FMID_1645682093FM"><div class="nodecontent">Log perf</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1868985631FM"><div class="nodecontent">Events per Second (EPS)</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_696291070FM"><div class="nodecontent">Log Analizi</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_318451911FM"><div class="nodecontent">Zaman</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_600501282FM"><img src="LogAnalizEgitimi.html_files/icons/yes.png" alt="yes" /> <div class="nodecontent">Merkezi NTP sunucu şart</div></li>
+	<li class="basic" id="FMID_784424945FM"><div class="nodecontent">Timezone'lar</div></li>
+	<li class="basic" id="FMID_1085652443FM"><div class="nodecontent">Korelasyon için de önemli</div></li></ul></li>
+	<li class="col" id="FMID_1536811221FM"><div class="nodecontent">Güvenlik</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_404871188FM"><img src="LogAnalizEgitimi.html_files/icons/yes.png" alt="yes" /> <div class="nodecontent">Sayısal zaman damga</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_754078685FM"><div class="nodecontent">Adli Bİlişim için kritik</div></li></ul></li>
+	<li class="basic" id="FMID_784058438FM"><div class="nodecontent">TCP/UDP 514 yerine TLS'li ortamdan log gönderme (syslog-ng,rsyslog)</div></li>
+	<li class="basic" id="FMID_1157902735FM"><div class="nodecontent">Sistem yöneticisi isterse log'ları değiştirebilir. Aynı bir Bilgi Güv. ekibinin <br />log'lardan sorumlu olması gerek.</div></li>
+	<li class="basic" id="FMID_328099059FM"><div class="nodecontent">Zaman damgası alınan log'ların yedkelenmeden önce<br />değişmediğinin ispatı önemlidir</div></li></ul></li>
+	<li class="col" id="FMID_141635344FM"><div class="nodecontent">Linux sistemlerde</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_51932077FM"><div class="nodecontent">Loglama Alt Yapısı</div></li>
+	<li class="basic" id="FMID_1524439170FM"><div class="nodecontent">KErnel auditlog</div></li>
+	<li class="col" id="FMID_49842451FM"><div class="nodecontent">Önemli log dosyaları</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1035372973FM"><div class="boxed"><div class="nodecontent">/var/log/messages</div><div class="note-and-attributes"><span class="note">
+    Contains most system messages.
+  </span></div></div></li>
+	<li class="basic" id="FMID_845052943FM"><div class="boxed"><div class="nodecontent">/var/log/secure</div><div class="note-and-attributes"><span class="note">
+    Authentication messages
+  </span></div></div></li></ul></li></ul></li>
+	<li class="col" id="FMID_53003818FM"><div class="nodecontent">Windows Sistemlerde</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_936263463FM"><div class="nodecontent">Loglama Alt Yapısı</div></li></ul></li>
+	<li class="col" id="FMID_1793956179FM"><div class="nodecontent">Güvenlik ve ağ sistemlerine yönelik</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_145729835FM"><div class="nodecontent">Saldırı sonrası log analizi</div></li>
+	<li class="basic" id="FMID_673020310FM"><div class="nodecontent">Güvenlik duvarı log'ları</div></li>
+	<li class="basic" id="FMID_1471885056FM"><div class="nodecontent">Ağ sistemleri log'ları</div></li></ul></li>
+	<li class="basic" id="FMID_357946547FM"><div class="nodecontent">Web sunucularına yönelik</div></li>
+	<li class="col" id="FMID_1201115177FM"><div class="nodecontent">Araçlar</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_801842286FM"><div class="nodecontent">Linux araçları</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1686618518FM"><div class="boxed"><div class="nodecontent">awk, sed, grep, cat, cut, zcat, zgrep</div><div class="note-and-attributes"><span class="note"><p>
+      Çok büyük olmayan dosyalarda yeterli.
+    </p></span></div></div></li>
+	<li class="basic" id="FMID_1246798365FM"><div class="boxed"><div class="nodecontent">less</div><div class="note-and-attributes"><span class="note"><p>
+      Büyük dosyalar buffered okuma.
+    </p></span></div></div></li>
+	<li class="basic" id="FMID_1452474800FM"><div class="boxed"><div class="nodecontent">tail ile izleme</div><div class="note-and-attributes"><span class="note"><p>
+      Son 20 satırın görülmesi:
+    </p><p /><p>
+      tail 20 /var/log/messages
+    </p></span></div></div></li>
+	<li class="basic" id="FMID_800162172FM"><div class="boxed"><div class="nodecontent">ngrep</div><div class="note-and-attributes"><span class="note"><p>
+      Network grep ile ağ trafiği izlenebilir. Ağda geçen bir string arama yapılabilir. DLP ve IDS'lerin atası sayılabilir.
+    </p></span></div></div></li>
+	<li class="basic" id="FMID_1835154363FM"><img src="LogAnalizEgitimi.html_files/icons/help.png" alt="help" /> <div class="boxed"><div class="nodecontent">LAB</div><div class="note-and-attributes"><span class="note"><ol><li>
+        Sunucu logundaki benzersin IP'lerin toplam sayısı?
+      </li><li>
+        /etc/passwd de ilk 5 satırdaki 6'ncı sütündaki verileri bas.
+      </li><li>
+        /var/log/messages log'unda bir string arama
+      </li><li><p>
+          ngrep -q test -d eth0
+        </p><p>
+          sudo ngrep  -d eno1 -q tubitak tcp port 80<br /></p>
+        sudo ngrep  -d eno1 -q -i '^SSH' not tcp port 22
+      </li></ol></span></div></div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1577112210FM"><div class="nodecontent">Metodoloji</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_898889226FM"><div class="nodecontent">Ne arandığının bilinmesi</div></li>
+	<li class="basic" id="FMID_1183497959FM"><div class="nodecontent">Log dosyaların elde edilmesi</div></li>
+	<li class="basic" id="FMID_1811213366FM"><div class="nodecontent">Amacın belirlenmesi</div></li>
+	<li class="basic" id="FMID_1763523673FM"><div class="nodecontent">Analiz yazılımı kullanarak istenen verilerin ayıklanması</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1253725393FM"><div class="nodecontent">Süreç</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_269218231FM"><div class="boxed"><div class="nodecontent">1. Log toplama</div><div class="note-and-attributes"><span class="note"><ol><li>
+        Kendi aktarım protokolü olmayan uygulamalar için standartta kullanılabilecek SYSLOG.
+      </li><li>
+        Ajan program (log forwarder, Tail2Syslog, FileBeat)
+      </li><li>
+        LOg sunucudan sunucudaki log'u çekme (ssh, wmi, smb, ftp)
+      </li></ol></span></div></div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1355453808FM"><div class="nodecontent">Web Sunucu Log'ları</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_623197357FM"><div class="nodecontent">GET/POST log'lari</div></li>
+	<li class="basic" id="FMID_1605028097FM"><div class="nodecontent">GET/POST başlık (header) bilgileri</div></li></ul></li></ul></li>
+	<li class="basic" id="FMID_790167583FM"><div class="nodecontent">2. Toplanan log'ların anlamlandırılması</div></li>
+	<li class="col" id="FMID_1873340065FM"><div class="boxed"><div class="nodecontent">3.  Log Yönetimi (1+2)</div><div class="note-and-attributes"><span class="note"><p>
+      ISO 27001 kapsamı log yönetimi sistemi kurulmasını zorunlu kılar.
+    </p></span></div></div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1036925602FM"><div class="nodecontent">Normalizasyon</div></li>
+	<li class="col" id="FMID_420513238FM"><div class="nodecontent">Disk Yönetimi</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_765628019FM"><div class="nodecontent">Log'lar ne kadar süreli saklanacak?</div></li>
+	<li class="basic" id="FMID_621911569FM"><div class="nodecontent">Politilka?</div></li></ul></li></ul></li>
+	<li class="basic" id="FMID_411286250FM"><div class="boxed"><div class="nodecontent">4. Korelasyon</div><div class="note-and-attributes"><span class="note"><p>
+      Birden fazla kaynaktan gelen log'ların ortak bir alanla birleştirilerek tek kayıtta gösterilmesi
+    </p></span></div></div></li></ul></li>
+	<li class="col" id="FMID_1509200717FM"><div class="nodecontent">Ürünler</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_190492719FM"><div class="nodecontent">Açık Kaynak</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1501372689FM"><div class="boxed"><div class="nodecontent">Graylog3</div><div class="note-and-attributes"><span class="note"><ul><li>
+        Log toplama ve log'lar üzerinde anlamlandırma yapılabilir; ancak korelasyon özelliği yok.
+      </li><li>
+        Ancak dashboard'lar geoip vb. özellikleri ile temel işler yapılabilir.
+      </li></ul></span></div></div></li>
+	<li class="basic" id="FMID_812447866FM"><div class="boxed"><div class="nodecontent">Elasticsearch+Kibana+FileBeat/Logstash</div><div class="note-and-attributes"><span class="note"><p>
+      Filebeat ile sunucuda çalışan ajanlar verilen log dosyaları json olarak ayrıştırıp Elasticsearch'e aktarır.
+    </p></span></div></div></li></ul></li>
+	<li class="col" id="FMID_1649126167FM"><div class="nodecontent">Ticari</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1186290465FM"><div class="nodecontent">IBM QRadar</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1761379798FM"><div class="nodecontent" style="font-size:100%;">Sorular</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1430464402FM"><div class="nodecontent" style="font-size:100%;">Log nedir?</div></li>
+	<li class="basic" id="FMID_942730940FM"><div class="nodecontent" style="font-size:100%;">Neden Log tutulur?</div></li>
+	<li class="basic" id="FMID_248546019FM"><div class="boxed"><div class="nodecontent" style="font-size:100%;">Log'a neden bakılır?</div><div class="note-and-attributes"><span class="note"><p>
+      Kimin baktığna göre değişir:
+    </p><ul><li>
+        Sistemci, sunucuda oluşan problemi anlamak ve sorunu gidermek için log dosyasına bakar.
+      </li><li>
+        Geliştirici, uygulamayı debug modda çalıştırıp detayları log'a yazdırır ve gerektiğinde bakar.
+      </li></ul></span></div></div></li>
+	<li class="basic" id="FMID_401884849FM"><div class="nodecontent" style="font-size:100%;">Web sunucu erişim log'una (veri setine) baktığımızda <br />ne gibi bilgiler çıkarabiliriz?</div></li>
+	<li class="basic" id="FMID_1908107239FM"><div class="nodecontent" style="font-size:100%;">Son 1 saatte erişim yapan IP'ler nedir?</div></li>
+	<li class="basic" id="FMID_287412101FM"><div class="nodecontent" style="font-size:100%;">Son 1 saatte web sunucusuna erişim yapan IP'lerden 500 hatası olan IP'ler hangileri?</div></li>
+	<li class="basic" id="FMID_361998172FM"><div class="nodecontent" style="font-size:100%;">Son 1 saatte e-posta sunucusuna kaba-kuvvet saldırısı (brute-force) yapan IP'ler hangileri?</div></li>
+	<li class="basic" id="FMID_172663948FM"><div class="nodecontent" style="font-size:100%;">Son 1 saatte en az 2 defa oturum açamamış ve yurt dışından bağlanan IP'ler hangileri?</div></li>
+	<li class="basic" id="FMID_1679530277FM"><div class="nodecontent" style="font-size:100%;">Kurumdaki dosya paylaşım sunucudaki X paylaşımındaki dosyalara kimler baktı?</div></li>
+	<li class="basic" id="FMID_868743752FM"><div class="nodecontent" style="font-size:100%;">Sunucuda kurulu e-posta yazılıımı jsp dosyaları değişti mi?</div></li>
+	<li class="basic" id="FMID_1315226294FM"><div class="nodecontent" style="font-size:100%;">Sunucuda /etc/passwd dosyası değişti mi?</div></li>
+	<li class="basic" id="FMID_1616382665FM"><div class="nodecontent" style="font-size:100%;">Aktif dizin sunucudaki Domain Administrators grubu üyeleri değişti mi?</div></li>
+	<li class="basic" id="FMID_1318738265FM"><div class="nodecontent" style="font-size:100%;">Gmail veya başka bir uygulamaya farklı bir bölgeden/IP'den erişildi mi?</div></li></ul></li>
+	<li class="col" id="FMID_1181932612FM"><div class="nodecontent">Olası Saldırılar</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1809570054FM"><div class="nodecontent">Scan: Host sweep (Port tarama)</div></li>
+	<li class="basic" id="FMID_1546503968FM"><div class="nodecontent">TCP Flood</div></li>
+	<li class="basic" id="FMID_732063790FM"><div class="nodecontent">Drupal Core RCE Vulnerability</div></li>
+	<li class="basic" id="FMID_145030421FM"><div class="nodecontent">HTTP SQL Injection Attempt </div></li>
+	<li class="basic" id="FMID_1489566869FM"><div class="nodecontent">HTTP Directory Traversal Request Attempt</div></li>
+	<li class="basic" id="FMID_1999693374FM"><div class="nodecontent">HTTP Unauthorized Brute Force Attack</div></li></ul></li>
+	<li class="col" id="FMID_381168374FM"><div class="nodecontent">Saldırı Sonrası İnceleme (SOME)</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1082001152FM"><div class="nodecontent">Timeline çıkarmak</div></li>
+	<li class="col" id="FMID_750854781FM"><div class="nodecontent">Sorular</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_656536029FM"><div class="boxed"><div class="nodecontent">Nasıl ve hangi yöntemle saldırı yapılmış</div><div class="note-and-attributes"><span class="note"><p>
+      Örn. Zimbra Autodiscover Servlet XXE and ProxyServlet SSRF
+    </p></span></div></div></li>
+	<li class="basic" id="FMID_663062904FM"><div class="nodecontent">Hangi hedef sistemlere yönelik olmuş?</div></li>
+	<li class="basic" id="FMID_776031999FM"><div class="nodecontent">Kim gerçekleştirmiş?</div></li>
+	<li class="basic" id="FMID_454025301FM"><div class="nodecontent">Saldırı nasıl anlaşıldı?</div></li>
+	<li class="basic" id="FMID_1144057276FM"><div class="nodecontent">Saldırı sonrası ele geçirilen sistemler kullanıldı mı? Post-exploit</div></li></ul></li>
+	<li class="col" id="FMID_1086873214FM"><div class="nodecontent">Log İnceleme</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_314771667FM"><div class="nodecontent">IDS, DNS, FW, uygulama sunucu log'ları</div></li></ul></li>
+	<li class="basic" id="FMID_1502807687FM"><div class="nodecontent">Temizlik</div></li>
+	<li class="basic" id="FMID_235026492FM"><div class="nodecontent">Rapor tutulması</div></li>
+	<li class="basic" id="FMID_933298689FM"><div class="nodecontent">Sadırı İhbarın yapılması</div></li></ul></li>
+	<li class="col" id="FMID_1977906050FM"><div class="nodecontent">Merkezi Log'lama</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_621669772FM"><div class="boxed"><div class="nodecontent">Neden ihtiyaç duyulur?</div><div class="note-and-attributes"><span class="note"><ul><li>
+        Log'ların ter yerde konsolidasyonu için gereklidir. Sunucu sayısı çok fazla olduğunda (&gt;50 mesela) yapılması gerekli.
+      </li><li>
+        Log'ların merkezde imzalanması, sınıflandırılması vb. işler için kolaylık sağlar.
+      </li><li>
+        Korelasyon için şart.
+      </li><li>
+        Log'ların yedek bir merkezde de tutulması güvenlik içindir.
+      </li></ul></span></div></div></li>
+	<li class="col" id="FMID_1803972739FM"><div class="nodecontent">Örnek Log'lar</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_749114842FM"><div class="nodecontent">Güvenlik duvarı log'ları</div></li>
+	<li class="basic" id="FMID_94353516FM"><div class="nodecontent">Sunucu audit log'ları</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_750031565FM"><div class="nodecontent">Hukuki Boyut</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1309548216FM"><div class="nodecontent">Ucu açık 5651 Kanunu</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_959591143FM"><div class="nodecontent">İç IP adres dağıtım log'ları (DHCP)</div></li>
+	<li class="basic" id="FMID_1607388166FM"><div class="nodecontent">Kullanıcı web erişim olayları</div></li>
+	<li class="basic" id="FMID_1194235493FM"><div class="nodecontent">Kullanıcı web erişim URL filtreleme</div></li>
+	<li class="basic" id="FMID_543952933FM"><div class="nodecontent">Oluşan verilerin bütünlüğünün ve gizliliğinin sağlanması</div></li></ul></li></ul></li>
+	<li class="col" id="FMID_1731666957FM"><div class="nodecontent">Standartlar</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_688210951FM"><div class="nodecontent">ISO 27001 BGYS</div>
+		<ul class="subexp">
+	<li class="col" id="FMID_1567951572FM"><div class="nodecontent">Monitörleme</div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_1321923200FM"><div class="nodecontent">Audit logging</div></li>
+	<li class="basic" id="FMID_1447793833FM"><div class="nodecontent">Monitoring system use</div></li>
+	<li class="basic" id="FMID_285900563FM"><div class="nodecontent">Protection of log information</div></li>
+	<li class="basic" id="FMID_1586080388FM"><div class="nodecontent">Administrator and operator logs</div></li>
+	<li class="basic" id="FMID_722903618FM"><div class="nodecontent">Fault logging</div></li>
+	<li class="basic" id="FMID_636452294FM"><div class="nodecontent">CLock sync</div></li></ul></li></ul></li></ul></li>
+	<li class="col" id="FMID_688280752FM"><div class="boxed"><div class="nodecontent">SIEM</div><div class="note-and-attributes"><span class="note"><p><b>Security Information and Event Management</b></p><p /><p>
+      Log'ların log kaynaklarından toplanması, log parser'lar ile ayrıştırılıp, korelasyon motorunda analizlerinin yapılması, log'ların anlık takibi ve raporlanması gibi işlemleri yapan yazılım/donanımlar için kısaltmadır.
+    </p></span></div></div>
+		<ul class="subexp">
+	<li class="basic" id="FMID_211719859FM"><div class="nodecontent">Korelasyon</div></li></ul></li>
+	<li class="basic" id="FMID_1401998911FM"><div class="boxed"><div class="nodecontent">Kaynaklar</div><div class="note-and-attributes"><span class="note"><ol><li>
+        https://www.slideshare.net/bgasecurity/log-yonetimi-ve-analizi-1
+      </li><li>
+        https://sematext.com/blog/what-is-syslog-daemons-message-formats-and-protocols/
+      </li></ol></span></div></div></li></ul></li></ul></div></body></html>
